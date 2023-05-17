@@ -1,1 +1,1 @@
-# actions-sync-bing-img
+# 使用github-actions获取bing每日图片
