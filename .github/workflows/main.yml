@@ -12,10 +12,6 @@ jobs:
       - run: npm install path
       - run: node main.js
       - run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.GH_DEPLOY_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-agent bash -c 'ssh-add ~/.ssh/id_rsa; git push origin HEAD'
           git config --global user.name "ChinaLeng"
           git config --global user.email "woaini3900098@qq.com"
           git remote add origin git@github.com:ChinaLeng/actions-sync-bing-img.git
