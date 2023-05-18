@@ -55,6 +55,3 @@ countries.forEach(country => {
   // 添加 3 秒延迟
   setTimeout(() => {}, 3000) 
 })
-// on:
-//   schedule:
-//     - cron: '0 8 * * *'
