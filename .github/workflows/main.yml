@@ -13,7 +13,7 @@ jobs:
       - run: node main.js
       - run: |
           git config --global user.name "ChinaLeng"
-          git config --global user.email "woaini3900098@qq.com"
+          git config --global user.email "893579684@qq.com"
           git add .
           git commit -m "Update files"
       - uses:  ad-m/github-push-action@master
