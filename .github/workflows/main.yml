@@ -16,7 +16,6 @@ jobs:
           git config --global user.email "woaini3900098@qq.com"
           git add .
           git commit -m "Update files"
-          git push
       - uses:  ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.MY_GIT_TOKEN }}
