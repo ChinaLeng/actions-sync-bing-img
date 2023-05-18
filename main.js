@@ -3,9 +3,9 @@ const fs = require('fs')
 const path = require('path')
 
 //需要获取的图片 国家 字母简称  
-//中国 zh-CN | 德国 de-DE | 加拿大 en-CA | 英国 en-GB | 印度 en-IN | 美国 en-US | 法国 fr-FR | 意大利 it-IT | 日本 ja-JP | 澳大利亚 en-AU | 摩洛哥 ar-MA
+//中国 zh-CN | 德国 de-DE | 加拿大 en-CA | 英国 en-GB | 印度 en-IN | 美国 en-US | 法国 fr-FR | 意大利 it-IT | 日本 ja-JP | 澳大利亚 en-AU 
 //新加坡 en-SG | 西班牙 es-ES | 韩国 ko-KR
-const countries = ["zh-CN", "de-DE", "en-CA", "en-GB", "en-IN", "en-US", "fr-FR", "it-IT", "ja-JP","ar-MA","en-AU","es-ES","en-SG","ko-KR"]
+const countries = ["zh-CN", "de-DE", "en-CA", "en-GB", "en-IN", "en-US", "fr-FR", "it-IT", "ja-JP","en-AU","es-ES","en-SG","ko-KR"]
 
 //获取当前时间
 const nowTime = new Date().toISOString().split('T')[0]
@@ -26,6 +26,7 @@ countries.forEach(country => {
     if(!fs.existsSync(directory)){
         fs.mkdirSync(directory)
     }
+    //按照国家字母缩写 存所有数据json
     const countryFileAllName = `${country}_ALL.json`
     const countryFileAllPath = path.join(targetPath,countryFileAllName)
     if (!fs.existsSync(countryFileAllPath)) {
