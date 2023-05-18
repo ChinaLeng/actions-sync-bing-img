@@ -5,9 +5,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Use Node.js
       - uses: actions/setup-node@v2
         with: 
           node-version: '16'
       - run: npm install axios
       - run: npm install path
-      - run: node main.js 
+      - run: node main.js
+      - name: Deploy
+        run: |
+          mkdir -p ~/.ssh 
+          echo "${{ secrets.GH_DEPLOY_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa 
+          ssh-agent bash -c 'ssh-add ~/.ssh/id_rsa; git push'
+          git config --global user.name "ChinaLeng"
+          git config --global user.email "woaini3900098@qq.com"
+          git add .
+          git commit -m "Update files" 
+          git push
