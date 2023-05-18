@@ -11,7 +11,7 @@ jobs:
       - run: npm install axios
       - run: npm install path
       - run: node main.js
-        run: |
+      - run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.GH_DEPLOY_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
