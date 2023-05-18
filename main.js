@@ -2,8 +2,10 @@ const axios = require('axios')
 const fs = require('fs')
 const path = require('path')
 
-//需要获取的图片 国家 字母简称
-const countries = ["zh-CN", "en-US","ja-JP"]
+//需要获取的图片 国家 字母简称  
+//中国 zh-CN | 德国 de-DE | 加拿大 en-CA | 英国 en-GB | 印度 en-IN | 美国 en-US | 法国 fr-FR | 意大利 it-IT | 日本 ja-JP | 澳大利亚 en-AU | 摩洛哥 ar-MA
+//新加坡 en-SG | 西班牙 es-ES | 韩国 ko-KR
+const countries = ["zh-CN", "de-DE", "en-CA", "en-GB", "en-IN", "en-US", "fr-FR", "it-IT", "ja-JP","ar-MA","en-AU","es-ES","en-SG","ko-KR"]
 
 //获取当前时间
 const nowTime = new Date().toISOString().split('T')[0]
@@ -24,18 +26,34 @@ countries.forEach(country => {
     if(!fs.existsSync(directory)){
         fs.mkdirSync(directory)
     }
+    const countryFileAllName = `${country}_ALL.json`
+    const countryFileAllPath = path.join(targetPath,countryFileAllName)
+    if (!fs.existsSync(countryFileAllPath)) {
+        fs.writeFile(countryFileAllPath, '[]', err => {
+            if (err) throw err; 
+          });
+    }
     const fileName = `${nowTime}.json`
     const filePath = path.join(directory, fileName)
     if (!fs.existsSync(filePath)) {
         const url = `https://bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mbl=1&mkt=${country}`
         axios.get(url)
         .then(response => {
-            const data = response.data.images
-            fs.writeFile(filePath, JSON.stringify(data), err => {
+            const dataImg = response.data.images[0]
+            fs.writeFile(filePath, JSON.stringify(dataImg), err => {
                 if (err) throw err
             })
+            const countryFileAllContent = fs.readFileSync(countryFileAllPath)
+            const countryFileAllJson = JSON.parse(countryFileAllContent)
+            countryFileAllJson.push(dataImg);
+            fs.writeFile(countryFileAllPath, JSON.stringify(countryFileAllJson), err => {
+                if (err) throw err;
+              });
         })
     }
   // 添加 3 秒延迟
   setTimeout(() => {}, 3000) 
 })
+// on:
+//   schedule:
+//     - cron: '0 8 * * *'
