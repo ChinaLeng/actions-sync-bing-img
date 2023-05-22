@@ -1,7 +1,7 @@
 name: Run Script
 on:
   schedule:
-    - cron: '0 10 * * * TZ=Asia/Shanghai'
+    - cron: '0 10 * * * * TZ=Asia/Shanghai'
 jobs:
   get-data:
     runs-on: ubuntu-latest
