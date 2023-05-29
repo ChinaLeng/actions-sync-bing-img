@@ -40,16 +40,20 @@ countries.forEach(country => {
         const url = `https://bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mbl=1&mkt=${country}`
         axios.get(url)
         .then(response => {
-            const dataImg = response.data.images[0]
-            fs.writeFile(filePath, JSON.stringify(dataImg), err => {
-                if (err) throw err
-            })
-            const countryFileAllContent = fs.readFileSync(countryFileAllPath)
-            const countryFileAllJson = JSON.parse(countryFileAllContent)
-            countryFileAllJson.push(dataImg);
-            fs.writeFile(countryFileAllPath, JSON.stringify(countryFileAllJson), err => {
-                if (err) throw err;
-              });
+            const imageList = response.data.images
+            if(imageList.length > 0){
+              const dataImg = imageList[0]
+              fs.writeFile(filePath, JSON.stringify(dataImg), err => {
+                  if (err) throw err
+              })
+              const countryFileAllContent = fs.readFileSync(countryFileAllPath)
+              const countryFileAllJson = JSON.parse(countryFileAllContent)
+              countryFileAllJson.push(dataImg);
+              fs.writeFile(countryFileAllPath, JSON.stringify(countryFileAllJson), err => {
+                  if (err) throw err;
+                });
+            }
+            
         })
     }
   // 添加 3 秒延迟
