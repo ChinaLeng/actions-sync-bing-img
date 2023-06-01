@@ -38,23 +38,20 @@ countries.forEach(country => {
     axios.get(url)
     .then(response => {
         const imageList = response.data.images
-        if(imageList.length > 0){
-          const dataImg = imageList[0]
-          const enddate = dataImg.enddate
-          const fileName = `${enddate}.json`
-          const filePath = path.join(directory, fileName)
-          if (!fs.existsSync(filePath)) {
-            fs.writeFile(filePath, JSON.stringify(dataImg), err => {
-                if (err) throw err
-            })
-            const countryFileAllContent = fs.readFileSync(countryFileAllPath)
-            const countryFileAllJson = JSON.parse(countryFileAllContent)
-            countryFileAllJson.push(dataImg);
-            fs.writeFile(countryFileAllPath, JSON.stringify(countryFileAllJson), err => {
-                if (err) throw err;
-              });
-            }
-                  
+        const dataImg = imageList[0]
+        const enddate = dataImg.enddate
+        const fileName = `${enddate}.json`
+        const filePath = path.join(directory, fileName)
+        if (!fs.existsSync(filePath)) {
+          fs.writeFile(filePath, JSON.stringify(dataImg), err => {
+              if (err) throw err
+          })
+          const countryFileAllContent = fs.readFileSync(countryFileAllPath)
+          const countryFileAllJson = JSON.parse(countryFileAllContent)
+          countryFileAllJson.push(dataImg);
+          fs.writeFile(countryFileAllPath, JSON.stringify(countryFileAllJson), err => {
+              if (err) throw err;
+            });
           }
     })
   // 添加 3 秒延迟
