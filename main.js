@@ -12,7 +12,7 @@ const nowTime = new Date().toISOString().split('T')[0]
 //当前目录
 const dir = process.cwd()
 //同级目录名称
-const targetDir = 'data'   
+const targetDir = 'datas'   
 //目标路径  json文件存储的地方 
 const targetPath = path.join(dir, targetDir)   
 //不存在目录就创建
