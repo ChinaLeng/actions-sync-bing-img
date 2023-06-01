@@ -2,6 +2,7 @@ name: Run Script
 on:
   schedule:
     - cron: '2 8,16 * * *'
+    workflow_dispatch: ''
 jobs:
   get-data:
     runs-on: ubuntu-latest
