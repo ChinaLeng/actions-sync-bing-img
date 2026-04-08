@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "axios": "^1.14.0",
+    "axios": "^1.15.0",
     "path": "^0.12.7",
     "underscore": "^1.13.6"
   }
